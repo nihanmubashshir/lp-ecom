@@ -1,2 +1,5 @@
 packages:
   - "database"
+  - "adminApi"
+  - "admin"
+  - "doc"
