@@ -16,19 +16,29 @@ export default function urlHandler(
   patterns.forEach((pattern) => {
     const [httpVerb, url] = pattern.split(" ");
     console.log(httpVerb, url);
+
     switch (httpVerb.toUpperCase()) {
       case "GET":
-        app.get(url, (req, res) => {
+        app.get(url, async (req, res) => {
           const params = req.params;
-          const result = urlPattern[pattern](params);
-          res.status(200);
+          const result = await urlPattern[pattern](params);
+          res.status(result.status);
           res.type("application/json");
-          res.json(result);
+          res.json(result.data);
         });
         break;
 
       case "POST":
-        throw new Error(`${httpVerb} not implemented yet`);
+        app.use(express.json());
+        app.post(url, async (req, res) => {
+          const params = req.params;
+          const data = req.body;
+          console.log(data);
+          const result = await urlPattern[pattern](params, data);
+          res.status(result.status);
+          res.type("application/json");
+          res.json(result.data);
+        });
         break;
 
       case "PUT":

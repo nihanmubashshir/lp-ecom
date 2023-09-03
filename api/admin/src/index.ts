@@ -3,15 +3,20 @@ const PORT = 3333;
 const app = express();
 
 import urlHandler from "./utils/path";
-import { UrlPattern } from "./types";
+import { UrlMappedFunction, UrlPattern } from "./types";
+const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+const createProducts: UrlMappedFunction = async (params, data) => {
+  console.log(params, data);
 
-const createProducts = () => {
-  console.log("not yet implemented");
-  return [1];
+  await delay(30);
+  return {
+    status: 200,
+    data: data as Object,
+  };
 };
 
 const urlPattern: UrlPattern = {
-  "GET /products/:id/data/:mx": createProducts,
+  "POST /products/:id": createProducts,
 };
 
 urlHandler(app, urlPattern);
