@@ -23,6 +23,9 @@ dependencies:
   express:
     specifier: ^4.18.2
     version: 4.18.2
+  globalTypes:
+    specifier: link:../../globalTypes
+    version: link:../../globalTypes
   mocha:
     specifier: ^10.2.0
     version: 10.2.0

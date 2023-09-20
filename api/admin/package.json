@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "dev": "pnpm nodemon index.ts"
   },
   "keywords": [],
   "author": "",
@@ -16,6 +17,7 @@
     "@types/supertest": "^2.0.12",
     "chai": "^4.3.8",
     "express": "^4.18.2",
+    "globalTypes": "link:../../globalTypes",
     "mocha": "^10.2.0",
     "node-ts": "^6.0.1",
     "nodemon": "^3.0.1",

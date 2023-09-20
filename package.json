@@ -8,5 +8,10 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "globalTypes": "link:../../globalTypes",
+    "zod": "^3.22.2",
+    "zod-express-middleware": "^1.4.0"
+  }
 }

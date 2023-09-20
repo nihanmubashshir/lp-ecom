@@ -1,5 +1,18 @@
+import { validateRequest } from "zod-express-middleware";
 import { UrlPattern } from "../types";
 import express from "express";
+
+/**
+ * Takes an express app and an urlPattern,
+ * url Pattern is a map from api endpoint to an object containing the validators and the handler function.
+ * Template:
+ * {
+ *  'HTTP-VERB /endpoint_in_express_syntax' : {
+ *  validatorSchema: schema for zod to validate the parameters, body and query.
+ *  handler: A function that should return an object containing the status code and data to be sent to the browser.
+ * }
+ *}
+ */
 
 export default function urlHandler(
   app: express.Application,
@@ -15,30 +28,38 @@ export default function urlHandler(
 
   patterns.forEach((pattern) => {
     const [httpVerb, url] = pattern.split(" ");
-    console.log(httpVerb, url);
-
     switch (httpVerb.toUpperCase()) {
       case "GET":
-        app.get(url, async (req, res) => {
-          const params = req.params;
-          const result = await urlPattern[pattern](params);
-          res.status(result.status);
-          res.type("application/json");
-          res.json(result.data);
-        });
+        app.get(
+          url,
+          validateRequest(urlPattern[pattern].validatorSchema),
+
+          async (req, res) => {
+            const params = req.params;
+            const result = await urlPattern[pattern].handler(params);
+            res.status(result.status);
+            res.type("application/json");
+            res.json(result.data);
+          }
+        );
         break;
 
       case "POST":
         app.use(express.json());
-        app.post(url, async (req, res) => {
-          const params = req.params;
-          const data = req.body;
-          console.log(data);
-          const result = await urlPattern[pattern](params, data);
-          res.status(result.status);
-          res.type("application/json");
-          res.json(result.data);
-        });
+
+        app.post(
+          url,
+          validateRequest(urlPattern[pattern].validatorSchema),
+
+          async (req, res) => {
+            const params = req.params;
+            const data = req.body;
+            const result = await urlPattern[pattern].handler(params, data);
+            res.status(result.status);
+            res.type("application/json");
+            res.json(result.data);
+          }
+        );
         break;
 
       case "PUT":

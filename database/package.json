@@ -4,9 +4,21 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "pnpm nodemon ./src/index.ts",
+    "build": "pnpm tsc",
+    "start": "node ./dist/index.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "pg": "^8.11.3",
+    "typescript": "^5.1.6"
+  },
+  "devDependencies": {
+    "@types/pg": "^8.10.2",
+    "nodemon": "^3.0.1",
+    "ts-node": "^10.9.1"
+  }
 }
