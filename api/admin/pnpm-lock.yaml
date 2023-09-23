@@ -5,6 +5,9 @@ settings:
   excludeLinksFromLockfile: false
 
 dependencies:
+  '@ecom/database':
+    specifier: link:../../database
+    version: link:../../database
   '@types/chai':
     specifier: ^4.3.5
     version: 4.3.5

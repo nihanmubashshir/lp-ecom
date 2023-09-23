@@ -14,7 +14,7 @@ const pool = new Pool({
   connectionTimeoutMillis: 2000,
 });
 
-const Product = new ProductRepository(pool);
+export const Product = new ProductRepository(pool);
 /**
  * SOLID
  * IOC containers
