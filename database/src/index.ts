@@ -15,6 +15,7 @@ const pool = new Pool({
 });
 
 export const Product = new ProductRepository(pool);
+
 /**
  * SOLID
  * IOC containers

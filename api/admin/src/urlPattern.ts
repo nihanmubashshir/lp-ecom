@@ -10,16 +10,9 @@ const Test: UrlMappedFunction = async (params, data) => {
 };
 
 export const urlPattern: UrlPattern = {
-  "POST /products/:id": {
+  "POST /products/": {
     validatorSchema: {
       body: ProductCreationData,
-      params: z.object({
-        id: z
-          .string()
-          .nonempty("Product Id is required")
-          .max(10)
-          .regex(/^\d+$/, { message: "Product id should only be digits." }),
-      }),
     },
     handler: createProducts,
   },

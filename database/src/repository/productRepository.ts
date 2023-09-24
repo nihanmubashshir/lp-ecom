@@ -6,7 +6,13 @@ class ProductRepository {
     this.pool = pool;
   }
 
-  async addProduct(title: string, description: string) {
+  async addProduct({
+    title,
+    description = undefined,
+  }: {
+    title: string;
+    description?: string | undefined;
+  }) {
     try {
       const query = {
         text: "INSERT INTO product (name, description) VALUES ($1, $2) RETURNING *",

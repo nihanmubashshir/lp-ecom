@@ -10,13 +10,13 @@ export const ProductCreationData = z
     description: true,
   });
 
-export namespace Product {
+export namespace ProductData {
   export type ProductCreationData = z.infer<typeof ProductCreationData>;
 }
 
-export type UrlMappedFunction = (
+export type UrlMappedFunction<T = any> = (
   params: any,
-  data?: AnalyserNode
+  data?: T
 ) => Promise<{
   data: Object;
   status: number;
