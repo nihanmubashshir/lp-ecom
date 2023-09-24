@@ -1,9 +1,8 @@
 import type { Pool } from "pg";
-
-class ProductRepository {
-  private pool: Pool;
+import Repository from ".";
+class ProductRepository extends Repository {
   constructor(pool: Pool) {
-    this.pool = pool;
+    super(pool);
   }
 
   async addProduct({

@@ -1,5 +1,6 @@
-import { createProducts } from "./handlerFunctions/product";
+import Product from "./handlerFunctions/product";
 import { UrlPattern, ProductCreationData, UrlMappedFunction } from "./types";
+import { Product as productRepository } from "@ecom/database";
 import z from "zod";
 
 const Test: UrlMappedFunction = async (params, data) => {
@@ -14,6 +15,6 @@ export const urlPattern: UrlPattern = {
     validatorSchema: {
       body: ProductCreationData,
     },
-    handler: createProducts,
+    handler: new Product(productRepository).createProducts,
   },
 };
