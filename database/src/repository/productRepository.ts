@@ -1,5 +1,6 @@
 import type { Pool } from "pg";
 import Repository from ".";
+
 class ProductRepository extends Repository {
   constructor(pool: Pool) {
     super(pool);
