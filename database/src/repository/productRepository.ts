@@ -6,6 +6,32 @@ class ProductRepository extends Repository {
     super(pool);
   }
 
+  async delete() {
+    throw Error("Not implemented yet");
+  }
+  async update() {
+    throw Error("Not implemented yet");
+  }
+
+  async retrieve({ id }: { id: string }) {
+    try {
+      const query = {
+        text: "SELECT * from product where id = $1",
+        values: [id],
+      };
+
+      const result = await this.pool.query(query);
+
+      if (!result.rows[0]) {
+        throw new Error(`No product was found with the id ${id}`);
+      }
+      return result.rows[0];
+    } catch (error) {
+      console.error("DATABSE ERROR: Error retrieving product:", error);
+      throw error;
+    }
+  }
+
   async addProduct({
     title,
     description = undefined,
