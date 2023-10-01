@@ -30,7 +30,6 @@ class Product {
     };
   };
   retrieveProducts: UrlMappedFunction = async (params) => {
-    console.log(params);
     let result;
     if (params) {
       try {
