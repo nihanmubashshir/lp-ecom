@@ -1,5 +1,10 @@
 import Product from "./handlerFunctions/product";
-import { UrlPattern, ProductCreationData, UrlMappedFunction } from "./types";
+import {
+  UrlPattern,
+  ProductCreationData,
+  UrlMappedFunction,
+  ProductRetrieve,
+} from "./types";
 import { Product as productRepository } from "@ecom/database";
 import z from "zod";
 
@@ -16,5 +21,11 @@ export const urlPattern: UrlPattern = {
       body: ProductCreationData,
     },
     handler: new Product(productRepository).createProducts,
+  },
+  "GET /products/:id": {
+    validatorSchema: {
+      params: ProductRetrieve,
+    },
+    handler: new Product(productRepository).retrieveProducts,
   },
 };

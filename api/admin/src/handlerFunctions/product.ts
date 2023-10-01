@@ -29,10 +29,27 @@ class Product {
       data: result as Object,
     };
   };
-  retrieveProducts: UrlMappedFunction = async (params, data) => {
+  retrieveProducts: UrlMappedFunction = async (params) => {
+    console.log(params);
+    let result;
+    if (params) {
+      try {
+        result = await this.repository.retrieve(params);
+      } catch (e) {
+        const message = e instanceof Error ? e.message : "Something went wrong";
+        console.error("Error getting product", message);
+        return {
+          status: 500,
+          data: {
+            error: message,
+          },
+        };
+      }
+    }
+
     return {
       status: 200,
-      data: {},
+      data: result,
     };
   };
 }

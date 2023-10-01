@@ -1,5 +1,12 @@
 import { RequestHandler } from "express";
 import z, { ZodSchema } from "zod";
+/**
+ * TODO: Make better checks for id and make sure only numbers are acceptable.
+ */
+
+export const ProductRetrieve = z.object({
+  id: z.string().nonempty("Id is required"),
+});
 
 export const ProductCreationData = z
   .object({
